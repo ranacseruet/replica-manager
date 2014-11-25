@@ -5,7 +5,12 @@ import java.util.Properties;
 
 public class Config 
 {
-	ArrayList<Server> servers = new ArrayList<Server>();
+	private ArrayList<Server> servers = new ArrayList<Server>();
+	
+	public ArrayList<Server> getServers()
+	{
+		return servers;
+	}
 	
 	public Config(String filePath) throws Exception
 	{

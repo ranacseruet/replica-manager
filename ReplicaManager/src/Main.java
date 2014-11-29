@@ -12,5 +12,8 @@ public class Main
 		Config config = new Config("config.properties");
 		HeartBeat heartBeat = new HeartBeat(config);
 		heartBeat.start();
+		
+		ReSpawner rs = new ReSpawner();
+		rs.start();
 	}
 }

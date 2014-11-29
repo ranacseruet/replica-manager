@@ -1,3 +1,5 @@
+import UDP.UDPClient;
+
 
 public class Server 
 {
@@ -13,7 +15,16 @@ public class Server
 	
 	public boolean isAlive()
 	{
-		//@todo
-		return true;
+		UDPClient client = new UDPClient(host, port);
+		String response = client.send("req:replica:isactive");
+		if(response == null) {
+			return false;
+		}
+		return Boolean.parseBoolean(response);
+	}
+	
+	public String toString()
+	{
+		return host+":"+port;
 	}
 }

@@ -12,13 +12,16 @@ public final class HeartBeat extends Thread
 	{
 		while(true)
 		{
-			System.out.println("Thread is running");
 			 try {
 				for(Server server:config.getServers())
 				{
 					if(!server.isAlive())
 					{
 						// TODO verify with other managers
+						System.out.println("server "+server+" is not OK");
+					}
+					else {
+						//System.out.println("server "+server+" is OK");
 					}
 				}
 				Thread.sleep(1000);

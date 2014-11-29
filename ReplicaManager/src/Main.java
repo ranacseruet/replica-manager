@@ -13,7 +13,7 @@ public class Main
 		HeartBeat heartBeat = new HeartBeat(config);
 		heartBeat.start();
 		
-		ReSpawner rs = new ReSpawner();
+		ReSpawner rs = new ReSpawner(config);
 		rs.start();
 	}
 }

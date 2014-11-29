@@ -21,7 +21,7 @@ public final class HeartBeat extends Thread
 						System.out.println("server "+server+" is not OK");
 					}
 					else {
-						//System.out.println("server "+server+" is OK");
+						System.out.println("server "+server+" is OK");
 					}
 				}
 				Thread.sleep(1000);

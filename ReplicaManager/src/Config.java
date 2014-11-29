@@ -5,7 +5,13 @@ import java.util.Properties;
 
 public class Config 
 {
+	Properties prop;
 	private ArrayList<Server> servers = new ArrayList<Server>();
+	
+	public String getPropertyValue(String propertyName)
+	{
+		return prop.getProperty(propertyName);
+	}
 	
 	public ArrayList<Server> getServers()
 	{
@@ -14,9 +20,9 @@ public class Config
 	
 	public Config(String filePath) throws Exception
 	{
-		Properties prop = new Properties();
+		prop = new Properties();
 		prop.load(new FileInputStream("config.properties"));
-		int i = 1, port;
+		int i = 1;
 		String hostProperty = "server"+i+".host";
 		String portProperty = "server"+i+++".port";
 		while(prop.getProperty(hostProperty) != null && prop.getProperty(portProperty) != null)

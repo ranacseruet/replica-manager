@@ -18,6 +18,17 @@ public class Config
 		return servers;
 	}
 	
+	public Server getServerByNameAndPort(String name, int port)
+	{
+		for(Server s:servers){
+			if(s.equals(name) && port == s.getPort()){
+				return s;
+			}
+		}
+		return null;
+	}
+	
+	
 	public Config(String filePath) throws Exception
 	{
 		prop = new Properties();

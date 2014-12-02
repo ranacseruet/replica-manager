@@ -18,6 +18,7 @@ public final class HeartBeat extends Thread
 					if(!server.isAlive())
 					{
 						// TODO verify with other managers
+						
 						System.out.println("server "+server+" is not OK");
 					}
 					else {

@@ -6,6 +6,16 @@ public class Server
 	private String host;
 	private int    port;
 	
+	public String getHostName()
+	{
+		return host;
+	}
+	
+	public int getPort()
+	{
+		return port;
+	}
+	
 	public Server(String host, int port)
 	{
 		this.host = host;
@@ -20,7 +30,7 @@ public class Server
 		if(response == null) {
 			return false;
 		}
-		return Boolean.parseBoolean(response);
+		return Boolean.parseBoolean(response)||response.equals("yes");
 	}
 	
 	public String toString()

@@ -35,11 +35,28 @@ public class ReSpawner extends Thread
 					//Restart done
 					server.sendResponse("restarted");
 				}
+				else if(reqParts[2].equals("isactive")) {
+					Server host = config.getServerByNameAndPort(reqParts[2], Integer.parseInt(reqParts[3]));
+					if(host.isAlive()) {
+						server.sendResponse("true");
+					}
+					else {
+						server.sendResponse("false");
+					}
+				}
 			}
 		}
 		catch(Exception exp) {
 			exp.printStackTrace();
 		}
-		
+		finally {
+			try{
+				process.destroy();
+				process.waitFor();
+			}
+			catch(Exception exp){
+				exp.printStackTrace();
+			}
+		}
 	}
 }

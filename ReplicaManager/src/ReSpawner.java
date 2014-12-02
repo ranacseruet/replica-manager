@@ -20,11 +20,12 @@ public class ReSpawner extends Thread
 	public void run()
 	{
 		try{
-			UDPServer server = new UDPServer("", 5004);
+			UDPServer server = new UDPServer("", Integer.parseInt(config.getPropertyValue("self.port")));
 			while(true){
 				String request = server.recieveRequest();
+				System.out.println("Respawner got request: "+request);
 				String[] reqParts = request.split(":");
-				if(reqParts[1].equals("reset")) {
+				if(reqParts[1].trim().equals("reset")) {
 					System.out.println("Got restart signal. Restarting");
 					if(process != null) {
 						process.destroy();
@@ -36,11 +37,14 @@ public class ReSpawner extends Thread
 					server.sendResponse("restarted");
 				}
 				else if(reqParts[2].equals("isactive")) {
-					Server host = config.getServerByNameAndPort(reqParts[2], Integer.parseInt(reqParts[3]));
-					if(host.isAlive()) {
+					Server host = config.getServerByNameAndPort(reqParts[3].trim(), Integer.parseInt(reqParts[4].trim()));
+					if(host != null && host.isAlive()) {
 						server.sendResponse("true");
 					}
 					else {
+						if(host == null) {
+							System.out.println("Invalid server info: "+reqParts[3].trim()+":"+reqParts[4].trim());
+						}
 						server.sendResponse("false");
 					}
 				}

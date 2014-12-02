@@ -5,6 +5,9 @@ public class Server
 {
 	private String host;
 	private int    port;
+	private RM	   rm;
+	
+	private int failed = 0;
 	
 	public String getHostName()
 	{
@@ -16,10 +19,28 @@ public class Server
 		return port;
 	}
 	
-	public Server(String host, int port)
+	public RM getRM()
+	{
+		return rm;
+	}
+	
+	public void setFailed() {
+		failed++;
+	}
+	
+	public void resetFailed() {
+		failed = 0;
+	}
+	
+	public boolean getFailed() {
+		return failed >= 3;
+	}
+	
+	public Server(String host, int port, RM rm)
 	{
 		this.host = host;
 		this.port = port;
+		this.rm = rm;
 	}
 	
 	

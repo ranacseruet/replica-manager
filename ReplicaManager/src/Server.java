@@ -33,7 +33,7 @@ public class Server
 	}
 	
 	public boolean getFailed() {
-		return failed >= 3;
+		return failed >= 2;
 	}
 	
 	public Server(String host, int port, RM rm)

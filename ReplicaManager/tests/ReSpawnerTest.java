@@ -13,7 +13,7 @@ public class ReSpawnerTest extends TestCase  {
 	
 	@Before
 	public void setUp() throws Exception {
-		udpClient = new UDPClient("localhost", 5004);
+		udpClient = new UDPClient("localhost", 5009);
 	}
 
 	@After

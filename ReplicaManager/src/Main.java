@@ -10,10 +10,21 @@ public class Main
 	public static void main(String args[]) throws Exception
 	{
 		Config config = new Config("config.properties");
+		
 		HeartBeat heartBeat = new HeartBeat(config);
 		heartBeat.start();
 		
-		ReSpawner rs = new ReSpawner(config);
+		final ReSpawner rs = new ReSpawner(config);
 		rs.start();
+		
+		Runtime.getRuntime().addShutdownHook(new Thread()
+        {
+            @Override
+            public void run()
+            {
+                System.out.println("Shutdown hook ran!");
+                rs.shutDownServer();
+            }
+        });
 	}
 }

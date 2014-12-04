@@ -5,9 +5,13 @@ public final class HeartBeat extends Thread
 {
 	private Config config;
 	
+	private String myHost;
+	private int myPort;
 	public HeartBeat(Config config)
 	{
 		this.config = config;
+		myHost = config.getPropertyValue("self.host");
+		myPort = Integer.parseInt(config.getPropertyValue("self.port"));
 	}
 	
 	public void run()
@@ -21,21 +25,25 @@ public final class HeartBeat extends Thread
 					{
 						System.out.println("server "+server+" is not OK");
 						if(server.getFailed()) {							
-							int dead = 0;
+							boolean dead = true;
 							for(RM rm:config.getReplicaManagers()) {
+								if(rm.getHost().equals(myHost) && rm.getPort() == myPort){
+									//don't recheck with itself
+									continue;
+								}
 								System.out.println("verifying status for "+server+" from RM "+rm);
 								//TODO for now will verify from its own RM as well
 								if(!rm.verifyServer(server)) {
 									System.out.println("Remote server also says dead");
-									dead++;
 								}
 								else {
+									dead = false;
 									System.out.println("Remote server says its alive");
 								}
 							}
 							
 							//send restart signal
-							if(dead >= config.getReplicaManagers().size()){
+							if(dead){
 								System.out.println("Sending restart signal");
 								UDPClient client = new UDPClient(server.getRM().getHost(), server.getRM().getPort());
 								client.sendOnly("req:reset:hostname");

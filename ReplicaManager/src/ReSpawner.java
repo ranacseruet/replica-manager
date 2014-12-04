@@ -31,7 +31,7 @@ public class ReSpawner extends Thread
 						process.destroy();
 						process.waitFor();
 					}
-					Thread.sleep(3000);
+					Thread.sleep(1000);
 					process = Runtime.getRuntime().exec(command);
 					//Restart done
 					server.sendResponse("restarted");
@@ -53,14 +53,18 @@ public class ReSpawner extends Thread
 		catch(Exception exp) {
 			exp.printStackTrace();
 		}
-		finally {
-			try{
+	}
+	
+	public void shutDownServer()
+	{
+		try{
+			if(process != null) {
 				process.destroy();
 				process.waitFor();
 			}
-			catch(Exception exp){
-				exp.printStackTrace();
-			}
+		}
+		catch(Exception exp){
+			exp.printStackTrace();
 		}
 	}
 }

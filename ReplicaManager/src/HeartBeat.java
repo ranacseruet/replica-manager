@@ -46,7 +46,7 @@ public final class HeartBeat extends Thread
 							if(dead){
 								System.out.println("Sending restart signal");
 								UDPClient client = new UDPClient(server.getRM().getHost(), server.getRM().getPort());
-								client.sendOnly("req:reset:hostname");
+								client.sendOnly("req:replica:reset");
 							}
 							
 						}

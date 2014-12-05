@@ -25,7 +25,7 @@ public class ReSpawner extends Thread
 				String request = server.recieveRequest();
 				System.out.println("Respawner got request: "+request);
 				String[] reqParts = request.split(":");
-				if(reqParts[1].trim().equals("reset")) {
+				if(reqParts.length>=3 && reqParts[2].trim().equals("reset")) {
 					System.out.println("Got restart signal. Restarting");
 					if(process != null) {
 						process.destroy();

@@ -38,7 +38,7 @@ public class Config
 	public Config(String filePath) throws Exception
 	{
 		prop = new Properties();
-		prop.load(new FileInputStream("config.properties"));
+		prop.load(new FileInputStream(filePath));
 		int i = 1;
 		String hostProperty = "server"+i+".host";
 		String portProperty = "server"+i+".ports";
